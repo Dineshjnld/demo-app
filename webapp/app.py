@@ -10,7 +10,7 @@ from ui.ui_manager import *
 from utils.logging_handler import Logger
 
 def write_login_page():
-    """Displays a login page with a video at the top, followed by username and password input fields.
+    """Displays a login page with username and password input fields.
     """
     st.title(':green[Login]')
     username = st.text_input("Username")
@@ -36,10 +36,12 @@ def write_header():
 def write_footer():
     """Writes the footer part of the UI.
     """
+    st.sidebar.markdown("---")
+    #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
+    #st.sidebar.image(img)
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
     st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
-
 def write_ui():
     """Handles the major part of the UI.
     """
@@ -56,6 +58,9 @@ def write_ui():
             st.markdown("---")
             display_courses()
         elif "video_selected" not in st.session_state:
+            display_course_banner(st.session_state["course_selected"])
+            display_video_tabs(st.session_state["course_selected"])
+        else:
             st.markdown("---")
             video_selected = st.session_state["video_selected"]
             display_video_content(Path(video_selected))
