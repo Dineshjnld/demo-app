@@ -77,7 +77,7 @@ def production_mode():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
+    img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
     st.set_page_config(page_title='AI Learning Catalysts',
                     layout='wide')
 
