@@ -37,10 +37,11 @@ def write_footer():
     """Writes the footer part of the UI.
     """
     st.sidebar.markdown("---")
-    img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
-    st.sidebar.image(img)
+    #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
+    #st.sidebar.image(img)
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
-
+    st.sidebar.warning(':red[AI Learning Catalysts]')
+    st.sidebar.warning(':blue[AI Based Training System]')
 def write_ui():
     """Handles the major part of the UI.
     """
