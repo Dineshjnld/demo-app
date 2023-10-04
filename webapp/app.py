@@ -12,9 +12,7 @@ from utils.logging_handler import Logger
 def write_login_page():
     """Displays a login page with a video at the top, followed by username and password input fields.
     """
-    # Add your video URL here
-    video_url = "https://www.youtube.com/watch?v=dGBt8_QUguY"  # Replace with your video URL
-    st.video(video_url)
+    st.video("sih.mp4")
 
     st.title(':green[Login]')
     username = st.text_input("Username")
