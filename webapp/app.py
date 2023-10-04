@@ -78,9 +78,9 @@ def production_mode():
 
 if __name__ == '__main__':
      img_path = 'webapp/static/imgs/logo.png'  # Provide the direct path to your image file
-    img = Image.open(img_path)
+     img = Image.open(img_path)
 
-    st.set_page_config(
+     st.set_page_config(
         page_title='AI Learning Catalysts',
         page_icon=img,
         layout='wide')
