@@ -5,8 +5,8 @@ valid_credentials = {"user": "password"}
 
 from PIL import Image
 from pathlib import Path
-from config import BASE_DIR
-from ui.ui_manager import *
+#from config import BASE_DIR
+#from ui.ui_manager import *
 from utils.logging_handler import Logger
 
 def write_login_page():
