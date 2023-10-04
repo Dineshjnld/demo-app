@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
-valid_credentials = {"user": "password"}
+valid_credentials = {"user": "admin"}
 
 from PIL import Image
 from pathlib import Path
