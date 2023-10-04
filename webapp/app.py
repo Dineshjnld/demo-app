@@ -1,5 +1,30 @@
 import streamlit as st
 
+# Add this HTML and CSS code to your Streamlit app
+st.markdown("""
+<style>
+.sidebar-toggle-button {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .sidebar-toggle-button {
+        display: block;
+    }
+    .sidebar {
+        display: none;
+    }
+}
+</style>
+""")
+
+if st.button("Toggle Sidebar", key="sidebar_toggle"):
+    st.session_state.sidebar_visible = not st.session_state.get("sidebar_visible", True)
+
+if st.session_state.get("sidebar_visible", True):
+    st.sidebar.markdown(":blue[Please note that this tool is only for demo purpose]")
+    st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
+    st.sidebar.warning(':blue[AI Based Training System]')
+
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
 valid_credentials = {"user": "training"}
 
@@ -36,12 +61,10 @@ def write_header():
 def write_footer():
     """Writes the footer part of the UI.
     """
-    #st.sidebar.markdown("---")
-    #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
-    #st.sidebar.image(img)
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
     st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
+
 def write_ui():
     """Handles the major part of the UI.
     """
