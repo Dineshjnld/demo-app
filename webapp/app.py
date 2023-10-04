@@ -13,8 +13,15 @@ def write_login_page():
     """Displays a login page with username and password input fields.
     """
     st.title(':green[Login]')
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+
+    # Set default values for the username and password fields
+    default_username = "user"
+    default_password = "training"
+
+    # Display the input fields with default values
+    username = st.text_input("Username", default_username)
+    password = st.text_input("Password", type="password", value=default_password)
+
     if st.button("Login"):
         if validate_credentials(username, password):
             st.session_state["demo_started"] = True
@@ -42,6 +49,7 @@ def write_footer():
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
     st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
+
 def write_ui():
     """Handles the major part of the UI.
     """
