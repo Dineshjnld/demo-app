@@ -79,7 +79,6 @@ def production_mode():
 if __name__ == '__main__':
     #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
     st.set_page_config(page_title='AI Learning Catalysts',
-                    page_icon=img,
                     layout='wide')
 
     write_header()
