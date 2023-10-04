@@ -77,9 +77,13 @@ def production_mode():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
-    st.set_page_config(page_title='AI Learning Catalysts',
-                    layout='wide')
+     img_path = 'webapp/static/imgs/logo.png'  # Provide the direct path to your image file
+    img = Image.open(img_path)
+
+    st.set_page_config(
+        page_title='AI Learning Catalysts',
+        page_icon=img,
+        layout='wide')
 
     write_header()
     write_ui()
