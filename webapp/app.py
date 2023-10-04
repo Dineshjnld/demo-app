@@ -12,7 +12,7 @@ from utils.logging_handler import Logger
 def write_login_page():
     """Displays a login page with a video at the top, followed by username and password input fields.
     """
-    st.video("sih.mp4")
+    #st.video("sih.mp4")
 
     st.title(':green[Login]')
     username = st.text_input("Username")
