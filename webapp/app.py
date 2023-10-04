@@ -40,7 +40,7 @@ def write_footer():
     #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
     #st.sidebar.image(img)
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
-    st.sidebar.warning(':red[AI Learning Catalysts]')
+    st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
 def write_ui():
     """Handles the major part of the UI.
