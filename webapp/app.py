@@ -10,7 +10,7 @@ from ui.ui_manager import *
 from utils.logging_handler import Logger
 
 def write_login_page():
-    """Displays a login page with username and password input fields.
+    """Displays a login page with a "Login" button.
     """
     st.title(':green[Login]')
 
@@ -18,7 +18,7 @@ def write_login_page():
     default_username = "user"
     default_password = "training"
 
-    # Display the input fields with default values
+    # Display the input fields with default values and store user inputs
     username = st.text_input("Username", default_username)
     password = st.text_input("Password", type="password", value=default_password)
 
