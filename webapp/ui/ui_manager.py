@@ -6,7 +6,6 @@ import webvtt
 import streamlit as st
 import streamlit.components.v1 as components
 from pathlib import Path 
-from ui.chatbot import Chatbot
 from common import time_to_seconds, load_course_material
 from config import DATASET_COURSE_BASE_DIR
 
@@ -103,7 +102,7 @@ def display_courses():
 
 
 def display_video_content(video_file: Path):
-    """Displays the video on the UI along with its subtitle on right side
+    """Displays the video on the UI along with its subtitle on the right side
 
     Args:
         video_file (Path): _description_
@@ -126,9 +125,9 @@ def display_video_content(video_file: Path):
             start, end = subtitle.start, subtitle.end
             subtitle_text = " ".join(subtitle.text.strip().split("\n")).strip() 
             transcript += "{} --> {}\n{}\n\n".format(start, end, subtitle_text)
-       
+
         st.text_area(label="Video Transcript:",
-                     value=transcript, height=280)
+                        value=transcript, height=280)
     
     st.markdown("---")
 
@@ -148,16 +147,32 @@ def callback_video_player(meta_data, video_path: Path):
 
 
 def display_viva_chat_bot(selected_course):
-    """Displays a chat-bot on UI for taking VIVA
+    """Displays a predefined VIVA bot on the UI for taking VIVA (oral) exams related to the selected course.
     """
-    # display_chat()
-    chatbot = Chatbot(chat_box_label="", viva_mode=True, selected_course=selected_course)
-    chatbot.listen_for_inputs()
+    st.header("VIVA Exam - {}".format(selected_course))
+
+    predefined_viva_questions = {
+        "Q1": "What is the main topic of this course?",
+        "Q2": "Explain one key concept you've learned so far.",
+        "Q3": "What are the learning objectives for this week?",
+    }
+
+    answer_inputs = {}
+    for question_id, question_text in predefined_viva_questions.items():
+        st.subheader("Question {}: {}".format(question_id, question_text))
+        answer_inputs[question_id] = st.text_input(f"Answer for Question {question_id}")
+
+    if st.button("Submit Answers"):
+        st.subheader("Your Answers:")
+        for question_id, answer in answer_inputs.items():
+            st.write("Question {}: {}".format(question_id, answer))
+
+    st.markdown("---")
 
 
 def display_video_tabs(selected_course):
     """Creates a UI for selecting videos for the selected course. Videos are arranged in 3 columns.
-    All videos from the config path is displayed.
+    All videos from the config path are displayed.
     """
     study_material = course_material[selected_course]["Study-Material"]
     week_names = study_material["week_names"]
@@ -169,7 +184,6 @@ def display_video_tabs(selected_course):
             col_1, col_2 = st.columns([1, 1])
 
             for i in range(0, len(subtopic_names), 2):
-               
                 with col_1:
                     video_path = study_material[week_name][subtopic_names[i]].get("video_file", None)
                     subtopic_name = subtopic_names[i]
@@ -192,6 +206,10 @@ def display_video_tabs(selected_course):
     
     st.markdown("---")
     st.button(label="Course Viva Exam", use_container_width=True, on_click=set_session_state, kwargs={
-              "state_name": "viva_mode", 
-              "state_value": True
-           })
+            "state_name": "viva_mode", 
+            "state_value": True
+        })
+
+# Example usage
+selected_course = "Machine Learning"
+display_viva_chat_bot(selected_course)
