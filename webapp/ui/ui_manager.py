@@ -1,11 +1,9 @@
-"""Utility functions for handling displaying of different widgets on UI
-"""
 import os
 import base64
 import webvtt
 import streamlit as st
 import streamlit.components.v1 as components
-from pathlib import Path 
+from pathlib import Path
 from common import time_to_seconds, load_course_material
 from config import DATASET_COURSE_BASE_DIR
 
@@ -123,12 +121,12 @@ def display_video_content(video_file: Path):
         transcript = ""
         for subtitle in subtitles:
             start, end = subtitle.start, subtitle.end
-            subtitle_text = " ".join(subtitle.text.strip().split("\n")).strip() 
+            subtitle_text = " ".join(subtitle.text.strip().split("\n")).strip()
             transcript += "{} --> {}\n{}\n\n".format(start, end, subtitle_text)
 
         st.text_area(label="Video Transcript:",
                         value=transcript, height=280)
-    
+
     st.markdown("---")
 
 
@@ -209,6 +207,9 @@ def display_video_tabs(selected_course):
             "state_name": "viva_mode", 
             "state_value": True
         })
+
+# Streamlit app title
+st.title("Your Streamlit App Title")
 
 # Example usage
 selected_course = "Machine Learning"
