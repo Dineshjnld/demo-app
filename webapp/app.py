@@ -13,8 +13,7 @@ def write_login_page():
     """Displays a login page with username and password input fields.
     """
     st.title(':green[Login]')
-    username = st.text_input("Enter your username", "")
-    st.write("You entered:", username)
+    st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
         if validate_credentials(username, password):
