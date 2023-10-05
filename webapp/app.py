@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
-valid_credentials = {"user": "training"}
+valid_credentials = {"user": "pvpsit"}
 
 from PIL import Image
 from pathlib import Path
@@ -13,7 +13,8 @@ def write_login_page():
     """Displays a login page with username and password input fields.
     """
     st.title(':green[Login]')
-    username = st.text_input("Username")
+    username = st.text_input("Enter your username", "")
+    st.write("You entered:", username)
     password = st.text_input("Password", type="password")
     if st.button("Login"):
         if validate_credentials(username, password):
