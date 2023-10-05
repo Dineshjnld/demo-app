@@ -69,8 +69,8 @@ def display_course_banner(course_name):
     course_index = courses.index(course_name)
     image_style = """
         img {
-            # width: 1000px !important;
-            height: 200px !important;
+            # width: 500px !important;
+            height: 100px !important;
         }
     """
     st.markdown(f'<style>{image_style}</style>', unsafe_allow_html=True)
