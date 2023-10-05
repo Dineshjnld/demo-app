@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
-valid_credentials = {"user": "pvpsit"}
+valid_credentials = {"user": "training"}
 
 from PIL import Image
 from pathlib import Path
@@ -13,7 +13,7 @@ def write_login_page():
     """Displays a login page with username and password input fields.
     """
     st.title(':green[Login]')
-    st.text_input("Username")
+    username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
         if validate_credentials(username, password):
@@ -36,6 +36,9 @@ def write_header():
 def write_footer():
     """Writes the footer part of the UI.
     """
+    #st.sidebar.markdown("---")
+    #img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
+    #st.sidebar.image(img)
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
     st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
