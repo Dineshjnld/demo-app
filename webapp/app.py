@@ -1,13 +1,9 @@
 import streamlit as st
+from PIL import Image
+from pathlib import Path
 
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
 valid_credentials = {"user": "training"}
-
-from PIL import Image
-from pathlib import Path
-from config import BASE_DIR
-from ui.ui_manager import *
-from utils.logging_handler import Logger
 
 def write_login_page():
     """Displays a login page with username and password input fields.
@@ -41,6 +37,7 @@ def write_footer():
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
     st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
+
 def write_ui():
     """Handles the major part of the UI.
     """
@@ -76,8 +73,15 @@ def production_mode():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    img_path = 'webapp/static/imgs/logo.png'  # Provide the direct path to your image file
-    img = Image.open(img_path)
+    # Provide the direct path to your image file
+    img_path = 'webapp/static/imgs/logo.png'
+    
+    # Check if the image file exists before attempting to open it
+    if Path(img_path).is_file():
+        img = Image.open(img_path)
+    else:
+        st.error(f"Image file not found at '{img_path}'")
+        img = None
 
     st.set_page_config(
         page_title='AI Learning Catalysts',
