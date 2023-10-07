@@ -3,20 +3,15 @@ import streamlit as st
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
 valid_credentials = {"user": "training"}
 
-from PIL import Image
-from pathlib import Path
-
 def write_login_page():
     """Displays a login page with username and password input fields.
     """
-    
     st.title(':red[Login]')
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
         if validate_credentials(username, password):
             st.session_state["demo_started"] = True
-            st.session_state["show_intermediate_page"] = True  # New session state variable
             # Reload the page to update the session state
             st.experimental_rerun()
         else:
@@ -27,27 +22,14 @@ def validate_credentials(username, password):
     """
     return valid_credentials.get(username) == password
 
-def write_header():
-    """Writes the header part of the UI.
+def display_courses():
+    """Displays a list of available courses to the user.
     """
-    st.title(':blue[AI Based IT Training System]')
-
-def write_footer():
-    """Writes the footer part of the UI.
-    """
-    
-    st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
-    st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
-    st.sidebar.warning(':blue[AI Based Training System]')
-
-def write_intermediate_page():
-    """Displays an intermediate page after login before redirecting to the course page.
-    """
-    st.title('Intermediate Page')
-    st.write("This is an intermediate page.")
-    if st.button("Continue to Courses"):
-        st.session_state["show_intermediate_page"] = False  # Hide intermediate page
-        st.experimental_rerun()
+    st.title("Available Courses")
+    st.write("Course 1: Introduction to AI")
+    st.write("Course 2: Machine Learning Fundamentals")
+    st.write("Course 3: Deep Learning Essentials")
+    # Add more courses as needed
 
 def write_ui():
     """Handles the major part of the UI.
@@ -55,46 +37,13 @@ def write_ui():
     if "demo_started" not in st.session_state:
         # Display the login page if the user has not logged in
         write_login_page()
-    elif st.session_state.get("show_intermediate_page", False):
-        # Display the intermediate page
-        write_intermediate_page()
     else:
-        # User has logged in and passed the intermediate page, display the rest of the UI
-        if "viva_mode" in st.session_state:
-            display_course_banner(st.session_state["course_selected"])
-            st.markdown("---")
-            display_viva_chat_bot(st.session_state["course_selected"])
-        elif "course_selected" not in st.session_state:
-            st.markdown("---")
-            display_courses()
-        elif "video_selected" not in st.session_state:
-            display_course_banner(st.session_state["course_selected"])
-            display_video_tabs(st.session_state["course_selected"])
-        else:
-            st.markdown("---")
-            video_selected = st.session_state["video_selected"]
-            display_video_content(Path(video_selected))
-            display_qa_chat_bot()
-
-def production_mode():
-    hide_streamlit_style = """
-    <style>
-    MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    a[class^="viewerBadge_container*"]  {visibility: hidden;}
-    </style>
-    """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+        # User has logged in, display the courses or course information
+        display_courses()  # Display available courses
 
 if __name__ == '__main__':
-    img_path = 'webapp/static/imgs/logo.png'  # Provide the direct path to your image file
-    img = Image.open(img_path)
-
     st.set_page_config(
         page_title='AI Learning Catalysts',
-        page_icon=img,
         layout='wide')
 
-    write_header()
     write_ui()
-    write_footer()
