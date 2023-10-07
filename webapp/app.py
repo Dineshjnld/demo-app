@@ -5,9 +5,6 @@ valid_credentials = {"user": "training"}
 
 from PIL import Image
 from pathlib import Path
-from config import BASE_DIR
-from ui.ui_manager import *
-from utils.logging_handler import Logger
 
 def write_login_page():
     """Displays a login page with username and password input fields.
@@ -19,6 +16,7 @@ def write_login_page():
     if st.button("Login"):
         if validate_credentials(username, password):
             st.session_state["demo_started"] = True
+            st.session_state["show_intermediate_page"] = True  # New session state variable
             # Reload the page to update the session state
             st.experimental_rerun()
         else:
@@ -41,14 +39,27 @@ def write_footer():
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
     st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
     st.sidebar.warning(':blue[AI Based Training System]')
+
+def write_intermediate_page():
+    """Displays an intermediate page after login before redirecting to the course page.
+    """
+    st.title('Intermediate Page')
+    st.write("This is an intermediate page.")
+    if st.button("Continue to Courses"):
+        st.session_state["show_intermediate_page"] = False  # Hide intermediate page
+        st.experimental_rerun()
+
 def write_ui():
     """Handles the major part of the UI.
     """
     if "demo_started" not in st.session_state:
         # Display the login page if the user has not logged in
         write_login_page()
+    elif st.session_state.get("show_intermediate_page", False):
+        # Display the intermediate page
+        write_intermediate_page()
     else:
-        # User has logged in, display the rest of the UI
+        # User has logged in and passed the intermediate page, display the rest of the UI
         if "viva_mode" in st.session_state:
             display_course_banner(st.session_state["course_selected"])
             st.markdown("---")
