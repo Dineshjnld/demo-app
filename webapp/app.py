@@ -50,9 +50,6 @@ def write_ui():
             display_course_banner(st.session_state["course_selected"])
             st.markdown("---")
             display_viva_chat_bot(st.session_state["course_selected"])
-        elif "course_selected" not in st.session_state:
-            st.markdown("---")
-            display_courses()
         elif "video_selected" not in st.session_state:
             display_course_banner(st.session_state["course_selected"])
             display_video_tabs(st.session_state["course_selected"])
