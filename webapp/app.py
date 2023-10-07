@@ -76,7 +76,7 @@ def production_mode():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    img_path = 'webapp/static/imgs/logo.png'  # Provide the direct path to your image file
+    img_path = 'logo.png'  # Provide the direct path to your image file
     img = Image.open(img_path)
 
     st.set_page_config(
