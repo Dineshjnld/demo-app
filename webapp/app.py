@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Define a dictionary of valid usernames and passwords (you should replace these with your actual credentials)
-valid_credentials = {"user": "training"}
+valid_credentials = {"user": "password"}
 
 from PIL import Image
 from pathlib import Path
@@ -12,8 +12,7 @@ from utils.logging_handler import Logger
 def write_login_page():
     """Displays a login page with username and password input fields.
     """
-    
-    st.title(':red[Login]')
+    st.title(':green[Login]')
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
@@ -37,10 +36,11 @@ def write_header():
 def write_footer():
     """Writes the footer part of the UI.
     """
-    
+    st.sidebar.markdown("---")
+    img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
+    st.sidebar.image(img)
     st.sidebar.warning(':blue[Please note that this tool is only for demo purpose]')
-    st.sidebar.image("webapp/static/imgs/logo.png", use_column_width=True)
-    st.sidebar.warning(':blue[AI Based Training System]')
+
 def write_ui():
     """Handles the major part of the UI.
     """
@@ -76,13 +76,10 @@ def production_mode():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    img_path = 'webapp/static/imgs/logo.png'  # Provide the direct path to your image file
-    img = Image.open(img_path)
-
-    st.set_page_config(
-        page_title='AI Learning Catalysts',
-        page_icon=img,
-        layout='wide')
+    img = Image.open(Path(BASE_DIR) / 'imgs/logo.png')
+    st.set_page_config(page_title='AI Learning Catalysts',
+                    page_icon=img,
+                    layout='wide')
 
     write_header()
     write_ui()
