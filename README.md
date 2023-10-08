@@ -1,2 +1,2 @@
-# demo-app
-## AI Learning Catalysts
+# AI Learning Catalysts
+** AI Based IT Training System
